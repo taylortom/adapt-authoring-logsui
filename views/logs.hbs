@@ -1,0 +1,37 @@
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="/css/adapt.css">
+<div>
+  <div class="location-title">
+    <div class="location-title-inner">
+      <div class="titles">
+        <div class="title">Logs</div>
+      </div>
+    </div>
+  </div>
+  <div class="inner">
+    <div class="logs">
+      {{#each logs}}
+        <div class="log {{level}}" data-id="{{_id}}">
+          <div class="attribute timestamp" data-val="{{timestamp}}">{{timestamp}}</div>
+          <div class="attribute level">{{level}}</div>
+          <div class="attribute module">{{module}}</div>
+          <div class="attribute data">{{data}}</div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+</div>
+<style>
+  .logs {
+    background: #2b3b44;
+    color: white;
+    padding: 15px;
+    overflow-y: scroll;
+    height: 90vh;
+  }
+  .log > div {
+    display: inline-block;
+    padding: 3px;
+    font-family: monospace;
+  }
+</style>
