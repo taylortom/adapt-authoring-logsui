@@ -1,10 +1,17 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/css/adapt.css">
-<div>
-  <div class="location-title">
-    <div class="location-title-inner">
-      <div class="titles">
-        <div class="title">Logs</div>
+<div class="container">
+  <div class="titles">
+    <div class="title">
+      <div class="text">Server logs</div>
+      <div class="buttons">
+        <select name="level" id="level">
+          <option value="">All</option>
+          <option value="error">Error</option>
+          <option value="warn">Warn</option>
+          <option value="info">Info</option>
+          <option value="debug">Debug</option>
+        </select>
       </div>
     </div>
   </div>
@@ -22,17 +29,35 @@
   </div>
 </div>
 <style>
+  .container {
+    height: 100vh;
+  }
+  .title {
+    padding: 10px;
+  }
+  .title .text {
+    font-size: 16px;
+  }
+  .title .buttons {
+    position: absolute;
+    top: 1px;
+    right: 2px;
+  }
+  .inner {
+    height: 100%;
+  }
   .logs {
     background: #2b3b44;
     color: white;
     padding: 15px;
     overflow-y: scroll;
-    height: 90vh;
+    height: 100%;
     box-sizing: border-box;
   }
   .log {
     white-space: nowrap;
   }
+  .log.debug { color: #929786 } 
   .log.info { color: #94e6ff }
   .log.warn { color: #ffdf33 }
   .log.error { color: #ff4646 }
@@ -46,3 +71,10 @@
   .log .attribute.level { font-weight: bold; }
   .log .attribute.module { text-decoration: underline; }
 </style>
+<script>
+  const level = document.getElementById('level');
+  level.value = window.location.search.replace('?level=', '');
+  level.addEventListener('change', e => {
+    window.location = `${window.location.origin}${window.location.pathname}?level=${e.target.value}`;
+  });
+</script>
