@@ -6,10 +6,10 @@
       <div class="text">Server logs</div>
       <div class="buttons">
         <a href="/logs">All</a>
-        <a href="/logs?level=error">Error</a>
-        <a href="/logs?level=warn">Warn</a>
-        <a href="/logs?level=info">Info</a>
-        <a href="/logs?level=debug">Debug</a>
+        <a class="error" href="/logs?level=error">Error</a>
+        <a class="warn" href="/logs?level=warn">Warn</a>
+        <a class="info" href="/logs?level=info">Info</a>
+        <a class="debug" href="/logs?level=debug">Debug</a>
       </div>
     </div>
   </div>
@@ -27,6 +27,12 @@
   </div>
 </div>
 <style>
+  body {
+   --debug-color: #80867e;
+   --info-color: #54a4ef;
+   --warn-color: #ffc107;
+   --error-color: #ff4646;
+  }
   .container {
     height: 100vh;
   }
@@ -35,17 +41,34 @@
   }
   .title .text {
     font-size: 16px;
+    font-weight: bold;
   }
   .title .buttons {
     position: absolute;
     top: 1px;
     right: 2px;
+    padding: 5px;
   }
+  .buttons a {
+    display: inline-block;
+    min-width: 60px;
+    padding: 5px;
+    border-radius: 3px;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: black;
+  }
+  .buttons a.debug { background-color: var(--debug-color); }
+  .buttons a.info { background-color: var(--info-color); }
+  .buttons a.warn { background-color: var(--warn-color); }
+  .buttons a.error { background-color: var(--error-color); }
   .inner {
     height: 100%;
   }
   .logs {
-    background: #2b3b44;
+    background: #202124;
     color: white;
     padding: 15px;
     overflow-y: scroll;
@@ -55,17 +78,17 @@
   .log {
     white-space: nowrap;
   }
-  .log.debug { color: #929786 } 
-  .log.info { color: #94e6ff }
-  .log.warn { color: #ffdf33 }
-  .log.error { color: #ff4646 }
+  .log.debug { color: var(--debug-color); } 
+  .log.info { color: var(--info-color); }
+  .log.warn { color: var(--warn-color); }
+  .log.error { color: var(--error-color); }
 
   .log > div {
     display: inline-block;
     padding: 3px;
     font-family: monospace;
   }
-  .log .attribute.timestamp { color: #999 }
+  .log .attribute.timestamp { color: var(--debug-color) }
   .log .attribute.level { font-weight: bold; }
   .log .attribute.module { text-decoration: underline; }
 </style>
