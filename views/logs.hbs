@@ -5,13 +5,11 @@
     <div class="title">
       <div class="text">Server logs</div>
       <div class="buttons">
-        <select name="level" id="level">
-          <option value="">All</option>
-          <option value="error">Error</option>
-          <option value="warn">Warn</option>
-          <option value="info">Info</option>
-          <option value="debug">Debug</option>
-        </select>
+        <a href="/logs">All</a>
+        <a href="/logs?level=error">Error</a>
+        <a href="/logs?level=warn">Warn</a>
+        <a href="/logs?level=info">Info</a>
+        <a href="/logs?level=debug">Debug</a>
       </div>
     </div>
   </div>
@@ -22,7 +20,7 @@
           <div class="attribute timestamp" data-val="{{timestamp}}">{{timestamp}}</div>
           <div class="attribute level">{{level}}</div>
           <div class="attribute module">{{module}}</div>
-          <div class="attribute data">{{data}}</div>
+          <div class="attribute data">{{{data}}}</div>
         </div>
       {{/each}}
     </div>
@@ -71,10 +69,3 @@
   .log .attribute.level { font-weight: bold; }
   .log .attribute.module { text-decoration: underline; }
 </style>
-<script>
-  const level = document.getElementById('level');
-  level.value = window.location.search.replace('?level=', '');
-  level.addEventListener('change', e => {
-    window.location = `${window.location.origin}${window.location.pathname}?level=${e.target.value}`;
-  });
-</script>
